@@ -1,14 +1,6 @@
-# wscat
+# wscat-with-redirects
 
-WebSocket cat.
-
-## Installation
-
-This module needs to be installed globally so use the `-g` flag when installing:
-
-```
-npm install -g wscat
-```
+WebSocket cat fork with followRedirects flag
 
 ## Usage
 
@@ -36,6 +28,7 @@ Options:
   --no-color                          run without color
   --slash                             enable slash commands for control frames (/ping, /pong, /close [code [, reason]])
   --proxy <[protocol://]host[:port]>  connect via a proxy. Proxy must support CONNECT method
+  --follow-redirects		      follows redirects on 3xx responses
   -h, --help                          output usage information
 ```
 
