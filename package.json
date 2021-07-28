@@ -1,14 +1,14 @@
 {
-  "name": "wscat",
+  "name": "wscat-with-redirects",
   "version": "4.0.1",
-  "description": "WebSocket cat",
+  "description": "WebSocket cat fork with followRedirects flag",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\""
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/websockets/wscat"
+    "url": "https://github.com/FSchraufstetter/wscat"
   },
   "keywords": [
     "wscat",
@@ -21,7 +21,7 @@
     "commander": "^5.0.0",
     "https-proxy-agent": "^5.0.0",
     "read": "^1.0.7",
-    "ws": "^7.1.2"
+    "ws": "^7.5.3"
   },
   "bin": {
     "wscat": "./bin/wscat"

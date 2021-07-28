@@ -142,18 +142,18 @@ program
   .option(
     '--passphrase [passphrase]',
     "specify a Client SSL Certificate Key's passphrase (--connect only). " +
-      "If you don't provide a value, it will be prompted for"
+    "If you don't provide a value, it will be prompted for"
   )
   .option('--no-color', 'run without color')
   .option(
     '--slash',
     'enable slash commands for control frames (/ping, /pong, /close ' +
-      '[code [, reason]])'
+    '[code [, reason]])'
   )
   .option(
     '--proxy <[protocol://]host[:port]>',
     'connect via a proxy. Proxy must support CONNECT method'
-  )
+  ).option('--follow-redirects', 'follows redirects on 3xx responses')
   .parse(process.argv);
 
 if (program.listen && program.connect) {
@@ -231,8 +231,7 @@ if (program.listen) {
     const headers = program.header.reduce((acc, cur) => {
       const i = cur.indexOf(':');
       const key = cur.slice(0, i);
-      const value = cur.slice(i + 1);
-      acc[key] = value;
+      acc[key] = cur.slice(i + 1);
       return acc;
     }, {});
 
@@ -247,10 +246,11 @@ if (program.listen) {
     if (program.ca) options.ca = fs.readFileSync(program.ca);
     if (program.cert) options.cert = fs.readFileSync(program.cert);
     if (program.key) options.key = fs.readFileSync(program.key);
+    if(program.followRedirects) options.followRedirects = true;
+
 
     if (program.proxy) {
-      var agent = new HttpsProxyAgent(program.proxy);
-      options.agent = agent;
+      options.agent = new HttpsProxyAgent(program.proxy);
     }
 
     let connectUrl = program.connect;
